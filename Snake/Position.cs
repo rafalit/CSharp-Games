@@ -1,13 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Snake
 {
-    public class Position
+    public class Position : Object
     {
-        public interface Row(get;);
-        public interface Col(get;);
-        public Postion(int row, int column)
+        public int Row{get;}
+        public int Col{get;}
+        public Position(int row, int column)
         {
             Row = row;
-            Col = col;
+            Col = column;
         }
 
         public Position Translate(Direction dir)
@@ -17,9 +21,9 @@ namespace Snake
 
         public override bool Equals(object obj)
         {
-            return obj is Direction direction && 
-                Row==direction.Row &&
-                Col==direction.Col;
+            return obj is Position position && 
+                Row==position.Row &&
+                Col==position.Col;
         }
 
         public override int GetHashCode()
@@ -29,7 +33,7 @@ namespace Snake
 
         public static bool operator ==(Position left, Position right)
         {
-            return EqualityComparer<Direction>.Default.Equals(left, right);
+            return EqualityComparer<Position>.Default.Equals(left, right);
         }
 
         public static bool operator!=(Position left, Position right)
