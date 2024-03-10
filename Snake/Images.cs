@@ -6,16 +6,17 @@ namespace Snake
 {
     public static class Images
     {
-        public readonly static ImageSource Empty = LoadImage("Empty.png");
-        public readonly static ImageSource Food = LoadImage("Food.png");
-        public readonly static ImageSource Head = LoadImage("Head.png");
-        public readonly static ImageSource DeadHead = LoadImage("DeadHead.png");
-        public readonly static ImageSource DeadBody = LoadImage("DeadBody.png");
-        public readonly static ImageSource Body = LoadImage("Body.png");
+        public readonly static ImageSource Empty = LoadImage("Resources/Empty.png");
+        public readonly static ImageSource Food = LoadImage("Resources/Food.png");
+        public readonly static ImageSource Head = LoadImage("Resources/Head.png");
+        public readonly static ImageSource DeadHead = LoadImage("Resources/DeadHead.png");
+        public readonly static ImageSource DeadBody = LoadImage("Resources/DeadBody.png");
+        public readonly static ImageSource Body = LoadImage("Resources/Body.png");
+
         private static ImageSource LoadImage(string fileName)
         {
-            return new BitmapImage(new Uri($"Assets/{fileName}", UriKind.Relative));
+            var uri = new Uri(fileName, UriKind.Relative);
+            return new BitmapImage(uri);
         }
-
     }
 }
