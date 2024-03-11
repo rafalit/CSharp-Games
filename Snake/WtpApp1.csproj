@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Update="Assets\icon.ico">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <Resource Include="Assets\Food.png" />
+        <Resource Include="Assets\Empty.png" />
+        <Resource Include="Assets\DeadHead.png" />
+        <Resource Include="Assets\DeadBody.png" />
+        <Resource Include="Assets\Head.png" />
+        <Resource Include="Assets\Body.png" />
+    </ItemGroup>
+
+</Project>

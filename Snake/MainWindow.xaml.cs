@@ -16,20 +16,26 @@ namespace Snake;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly int rows = 10, cols = 10;
+    private readonly int rows = 15, cols = 15;
     private readonly Image[,] gridImages;
 
     public MainWindow()
     {
-        InitializeComponent();
-        gridImages = SetupGrid();
+        try
+        {
+            InitializeComponent();
+            gridImages = SetupGrid();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
     private Image[,] SetupGrid()
     {
         Image[,] images = new Image[rows, cols];
-        GameGrid.Rows = rows;
-        GameGrid.Columns = cols;
+        
 
         for (int r = 0; r < rows; r++)
         {
@@ -37,7 +43,7 @@ public partial class MainWindow : Window
             {
                 Image imageControl = new Image
                 {
-                    Source = Images.Empty
+                    Source = Images.Head
                 };
 
                 images[r, c] = imageControl;
@@ -47,4 +53,5 @@ public partial class MainWindow : Window
 
         return images;
     }
+
 }

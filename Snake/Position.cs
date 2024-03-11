@@ -6,8 +6,8 @@ namespace Snake
 {
     public class Position : Object
     {
-        public int Row{get;}
-        public int Col{get;}
+        public int Row { get; }
+        public int Col { get; }
         public Position(int row, int column)
         {
             Row = row;
@@ -16,14 +16,14 @@ namespace Snake
 
         public Position Translate(Direction dir)
         {
-            return new Position(Row + dir.RowOffset, Col+dir.ColOffset);
+            return new Position(Row + dir.RowOffset, Col + dir.ColOffset);
         }
 
         public override bool Equals(object obj)
         {
-            return obj is Position position && 
-                Row==position.Row &&
-                Col==position.Col;
+            return obj is Position position &&
+                Row == position.Row &&
+                Col == position.Col;
         }
 
         public override int GetHashCode()
@@ -36,10 +36,10 @@ namespace Snake
             return EqualityComparer<Position>.Default.Equals(left, right);
         }
 
-        public static bool operator!=(Position left, Position right)
+        public static bool operator !=(Position left, Position right)
         {
             return !(left == right);
-        } 
+        }
 
     }
 }

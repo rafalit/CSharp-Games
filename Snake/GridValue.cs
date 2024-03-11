@@ -6,7 +6,7 @@ namespace Snake
 {
     public enum GridValue
     {
-        Empty, 
+        Empty,
         Snake,
         Food,
         Outside

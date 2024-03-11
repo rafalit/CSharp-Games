@@ -12,14 +12,14 @@
         WindowStartupLocation="CenterScreen"
         
 >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height = "auto"/>
-            <RowDefinition Height = "*"/>
-        </Grid.RowDefinitions>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height = "auto"/>
+			<RowDefinition Height = "*"/>
+		</Grid.RowDefinitions>
 
 
-        <TextBlock x:Name="ScoreText"
+		<TextBlock x:Name="ScoreText"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Text="SCORE 0"
@@ -27,23 +27,23 @@
                     Margin="10"
                     />
 
-        <Border x:Name="GridBorder"
+		<Border x:Name="GridBorder"
                 Grid.Row="1"
                 BorderBrush="{StaticResource GridLineColor}"
                 BorderThickness="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
 
-            <UniformGrid x:Name="GameGrid"
-                        Width="400"
-                        Height="400"
-                        Background="{StaticResource GridBackgroundColor}"
-                        SnapsToDevicePixels="True"
-                        RenderOptions.BitmapScalingMode="HighQuality"
-                        >
+			<UniformGrid x:Name="GameGrid"
+             Width="400"
+             Height="400"
+             Background="Transparent"
+             SnapsToDevicePixels="True"
+             RenderOptions.BitmapScalingMode="HighQuality"
+             Rows="10" Columns="10">
+			</UniformGrid>
 
-            </UniformGrid>
 
-        </Border>
-    </Grid>
+		</Border>
+	</Grid>
 </Window>
