@@ -10,6 +10,8 @@
         Foreground="{StaticResource TextColor}"
         FontFamily="{StaticResource MainFont}"
         WindowStartupLocation="CenterScreen"
+		Loaded ="Window_Loaded"
+		KeyDown="Window_KeyDown"
         
 >
 	<Grid>
@@ -32,7 +34,8 @@
                 BorderBrush="{StaticResource GridLineColor}"
                 BorderThickness="10"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center">
+                VerticalAlignment="Center"
+				RenderOptions.EdgeMode="Aliased">
 
 			<UniformGrid x:Name="GameGrid"
              Width="400"
@@ -40,7 +43,7 @@
              Background="Transparent"
              SnapsToDevicePixels="True"
              RenderOptions.BitmapScalingMode="HighQuality"
-             Rows="10" Columns="10">
+		    >
 			</UniformGrid>
 
 

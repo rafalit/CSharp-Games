@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
 	<Application.Resources>
-		<SolidColorBrush x:Key="BackgroundColor" Color="White" />
+		<SolidColorBrush x:Key="BackgroundColor" Color="#211E2B" />
 		<SolidColorBrush x:Key="TextColor" Color="Black" />
 		<FontFamily x:Key="MainFont">Arial</FontFamily>
 		<SolidColorBrush x:Key="GridLineColor" Color="Gray" />

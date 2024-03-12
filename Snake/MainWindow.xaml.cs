@@ -16,8 +16,18 @@ namespace Snake;
 /// </summary>
 public partial class MainWindow : Window
 {
+
+    private readonly Dictionary<GridValue, ImageSource> gridValToImage = new()
+    {
+        {GridValue.Empty, Images.Empty },
+        {GridValue.Snake, Images.Body },
+        {GridValue.Food, Images.Food }
+    };
+
     private readonly int rows = 15, cols = 15;
     private readonly Image[,] gridImages;
+    private GameState gameState;
+
 
     public MainWindow()
     {
@@ -25,6 +35,7 @@ public partial class MainWindow : Window
         {
             InitializeComponent();
             gridImages = SetupGrid();
+            gameState = new GameState(rows, cols);
         }
         catch (Exception ex)
         {
@@ -32,10 +43,63 @@ public partial class MainWindow : Window
         }
     }
 
+    private async void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        Draw();
+        await GameLoop();
+    }
+
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (gameState.GameOver)
+        {
+            return;
+        }
+
+        Console.WriteLine($"Key pressed: {e.Key}");
+
+        switch(e.Key)
+        {
+            case Key.Left:
+                gameState.ChangeDirection(Direction.Left);
+                break;
+
+            case Key.Right:
+                gameState.ChangeDirection(Direction.Right);
+                break;
+
+            case Key.Down:
+                gameState.ChangeDirection(Direction.Down);
+                break;
+
+            case Key.Up:
+                gameState.ChangeDirection(Direction.Up);
+                break;
+
+        }
+    }
+
+    private async Task GameLoop()
+    {
+        try
+        {
+            while (!gameState.GameOver)
+            {
+                await Task.Delay(100);
+                gameState.Move();
+                Draw();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception in GameLoop: {ex.Message}");
+        }
+    }
+
     private Image[,] SetupGrid()
     {
         Image[,] images = new Image[rows, cols];
-        
+
 
         for (int r = 0; r < rows; r++)
         {
@@ -43,7 +107,7 @@ public partial class MainWindow : Window
             {
                 Image imageControl = new Image
                 {
-                    Source = Images.Head
+                    Source = Images.Empty
                 };
 
                 images[r, c] = imageControl;
@@ -54,4 +118,20 @@ public partial class MainWindow : Window
         return images;
     }
 
+    private void Draw()
+    {
+        DrawGrid();
+    }
+
+    private void DrawGrid()
+    {
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                GridValue gridVal = gameState.Grid[r, c];
+                gridImages[r, c].Source = gridValToImage[gridVal];
+            }
+        }
+    }
 }

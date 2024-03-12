@@ -64,6 +64,11 @@ namespace Snake
             Grid[pos.Row, pos.Col] = GridValue.Food;
         }
 
+        public Position HeadPosition()
+        {
+            return snakePositions.First.Value;
+        }
+
         public Position TailPosition()
         {
             return snakePositions.Last.Value;
@@ -114,7 +119,7 @@ namespace Snake
 
         public void Move()
         {
-            Position newHeadPos = TailPosition().Translate(Dir);
+            Position newHeadPos = HeadPosition().Translate(Dir);
             GridValue hit = WillHit(newHeadPos);
 
             if (hit == GridValue.Outside || hit == GridValue.Snake)
