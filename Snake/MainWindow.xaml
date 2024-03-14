@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Snake"
         mc:Ignorable="d"
         Title="Snake" Height="500" Width="800"
+		MinWidth="300" MinHeight ="300"
         Background="{StaticResource BackgroundColor}"
         Foreground="{StaticResource TextColor}"
         FontFamily="{StaticResource MainFont}"
@@ -14,39 +15,42 @@
 		KeyDown="Window_KeyDown"
         
 >
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height = "auto"/>
-			<RowDefinition Height = "*"/>
-		</Grid.RowDefinitions>
+	<Viewbox>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height = "auto"/>
+				<RowDefinition Height = "*"/>
+			</Grid.RowDefinitions>
 
 
-		<TextBlock x:Name="ScoreText"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Text="SCORE 0"
-                    FontSize="22"
-                    Margin="10"
+			<TextBlock x:Name="ScoreText"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						Text="SCORE 0"
+						FontSize="22"
+						Margin="10"
+						Foreground="White"
                     />
 
-		<Border x:Name="GridBorder"
-                Grid.Row="1"
-                BorderBrush="{StaticResource GridLineColor}"
-                BorderThickness="10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-				RenderOptions.EdgeMode="Aliased">
+			<Border x:Name="GridBorder"
+					Grid.Row="1"
+					BorderBrush="{StaticResource GridLineColor}"
+					BorderThickness="10"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					RenderOptions.EdgeMode="Aliased"
+					Margin="20. 0. 20. 20">
 
-			<UniformGrid x:Name="GameGrid"
-             Width="400"
-             Height="400"
-             Background="Transparent"
-             SnapsToDevicePixels="True"
-             RenderOptions.BitmapScalingMode="HighQuality"
-		    >
-			</UniformGrid>
-
-
-		</Border>
-	</Grid>
+				<UniformGrid x:Name="GameGrid"
+				 Width="400"
+				 Height="400"
+				 Background="Transparent"
+				 SnapsToDevicePixels="True"
+				 RenderOptions.BitmapScalingMode="HighQuality">
+					
+				</UniformGrid>
+			</Border>
+		</Grid>
+	</Viewbox>
+	
 </Window>
