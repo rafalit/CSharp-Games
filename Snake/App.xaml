@@ -4,9 +4,11 @@
              StartupUri="MainWindow.xaml">
 	<Application.Resources>
 		<SolidColorBrush x:Key="BackgroundColor" Color="#211E2B" />
-		<SolidColorBrush x:Key="TextColor" Color="Black" />
-		<FontFamily x:Key="MainFont">Arial</FontFamily>
 		<SolidColorBrush x:Key="GridLineColor" Color="Gray" />
 		<SolidColorBrush x:Key="GridBackgroundColor" Color="LightGray" />
+		<SolidColorBrush x:Key="TextColor" Color="Black" />
+		<FontFamily x:Key="MainFont">Assets/#Droid Sans Mono</FontFamily>
+		<SolidColorBrush x:Key="OverlayColor">#7F000000</SolidColorBrush>
+		
 	</Application.Resources>
 </Application>

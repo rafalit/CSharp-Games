@@ -11,14 +11,14 @@
         Foreground="{StaticResource TextColor}"
         FontFamily="{StaticResource MainFont}"
         WindowStartupLocation="CenterScreen"
-		Loaded ="Window_Loaded"
+		PreviewKeyDown="Window_PreviewKeyDown"
 		KeyDown="Window_KeyDown"
         
 >
 	<Viewbox>
 		<Grid>
 			<Grid.RowDefinitions>
-				<RowDefinition Height = "auto"/>
+				<RowDefinition Height = "Auto"/>
 				<RowDefinition Height = "*"/>
 			</Grid.RowDefinitions>
 
@@ -47,9 +47,27 @@
 				 Background="Transparent"
 				 SnapsToDevicePixels="True"
 				 RenderOptions.BitmapScalingMode="HighQuality">
-					
 				</UniformGrid>
+				
 			</Border>
+
+			<Border x:Name="Overlay"
+				Grid.Row="1"
+				Background="{StaticResource OverlayColor}"
+				Width = "{Binding Path=ActualWidth, ElementName = GridBorder}"
+				Height ="{Binding Path=ActualHeight, ElementName = GridBorder}"
+				Margin = "{Binding Path = Margin, ElementName = GridBorder}"
+				RenderOptions.EdgeMode = "Aliased">
+				
+				<TextBlock x:Name="OverlayText"
+						   Text="Naciśnij przycisk aby rozpocząć"
+						   FontSize="26"
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Center"
+						   TextWrapping = "Wrap" 
+						   Foreground = "White"/>
+			</Border>
+			
 		</Grid>
 	</Viewbox>
 	
