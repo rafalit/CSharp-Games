@@ -18,4 +18,9 @@ The Snake game consists of controlling a snake on a grid. The snake moves contin
 * C#: The primary programming language used for game logic and backend development.
 * WPF (Windows Presentation Foundation): Used for creating the user interface and managing visual elements.
 * XAML (eXtensible Application Markup Language): Used for designing the layout of the game window.
-#### Scrrenshots
+#### Screenshots
+<div style="display: flex;">
+    <img src="screenshots/s1.png" alt="Screenshot 1" style="margin-right: 10px;">
+    <img src="screenshots/s2.png" alt="Screenshot 2">
+    <img src="screenshots/s3.png" alt="Screenshot 3">
+</div>
