@@ -67,6 +67,12 @@ namespace TTT
 
             if(AreSquaresMarked(mainDiag, CurrentPlayer))
             {
+                winInfo = new WinInfo { Type = WinType.MainDiagonal };
+                return true;
+            }
+
+            if (AreSquaresMarked(antiDiag, CurrentPlayer))
+            {
                 winInfo = new WinInfo { Type = WinType.AntiDiagonal };
                 return true;
             }
