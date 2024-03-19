@@ -29,6 +29,20 @@ public partial class MainWindow : Window
         {Player.O, new ObjectAnimationUsingKeyFrames() }
     };
 
+    private readonly DoubleAnimation fadeOutAnimation = new DoubleAnimation
+    {
+        Duration = TimeSpan.FromSeconds(.5),
+        From = 1,
+        To = 0
+    };
+
+    private readonly DoubleAnimation fadeInAnimation = new DoubleAnimation
+    {
+        Duration = TimeSpan.FromSeconds(.5),
+        From = 0,
+        To = 1
+    };
+
 
     private readonly Image[,] imageControls = new Image[3, 3];
     private readonly GameState gameState = new GameState();
@@ -83,21 +97,33 @@ public partial class MainWindow : Window
         PlayerImage.Source = imageSources[gameState.CurrentPlayer];
     }
 
-    private void TransitionToEndScreen(string text, ImageSource winnerImage)
-    {
-        TurnPanel.Visibility = Visibility.Hidden;
-        GameCanvas.Visibility = Visibility.Hidden;
+    private async Task FadeOut(UIElement uiElement)
+{
+    uiElement.BeginAnimation(OpacityProperty, fadeOutAnimation);
+    await Task.Delay(fadeOutAnimation.Duration.TimeSpan);
+    uiElement.Visibility = Visibility.Hidden;
+}
+    
+    private async Task FadeIn(UIElement uiElement)
+{
+    uiElement.Visibility = Visibility.Visible;
+    uiElement.BeginAnimation(OpacityProperty, fadeInAnimation);
+    await Task.Delay(fadeInAnimation.Duration.TimeSpan);
+}
+    
+    private async Task TransitionToEndScreen(string text, ImageSource winnerImage)
+{
+        await Task.WhenAll(FadeOut(TurnPanel), FadeOut(GameCanvas));
         ResultText.Text = text;
         WinnerImage.Source = winnerImage;
-        EndScreen.Visibility = Visibility.Visible;
+        await FadeIn(EndScreen);
     }
 
-    private void TransitionToGameScreen()
+    private async Task TransitionToGameScreen()
     {
-        EndScreen.Visibility = Visibility.Hidden;
+    await FadeOut(EndScreen);
         Line.Visibility = Visibility.Hidden;
-        TurnPanel.Visibility = Visibility.Visible;
-        GameCanvas.Visibility = Visibility.Visible;
+    await Task.WhenAll(FadeIn(TurnPanel), FadeIn(GameCanvas));
     }
 
     private (Point, Point) FindLinePoint(WinInfo winInfo)
@@ -122,17 +148,31 @@ public partial class MainWindow : Window
         return (new Point(GameGrid.Width, 0), new Point(0, GameGrid.Height));
     }
 
-    private void ShowLine(WinInfo winInfo)
+    private async Task ShowLine(WinInfo winInfo)
     {
         (Point start, Point end) = FindLinePoint(winInfo);
 
         Line.X1 = start.X;
         Line.Y1 = start.Y;
 
-        Line.X2 = end.X;
-        Line.Y2 = end.Y;
+        DoubleAnimation x2Animation = new DoubleAnimation
+        {
+            Duration = TimeSpan.FromSeconds(.25),
+            From = start.X,
+            To = end.X
+        };
+
+        DoubleAnimation y2Animation = new DoubleAnimation
+        {
+            Duration = TimeSpan.FromSeconds(.25),
+            From = start.Y,
+            To = end.Y
+        };
 
         Line.Visibility = Visibility.Visible;
+        Line.BeginAnimation(Line.X2Property, x2Animation);
+        Line.BeginAnimation(Line.Y2Property, y2Animation);
+        await Task.Delay(x2Animation.Duration.TimeSpan);
 
     }
     public async void OnGameEnded(GameResult gameResult)
@@ -140,17 +180,17 @@ public partial class MainWindow : Window
         await Task.Delay(1000);
         if(gameResult.Winner == Player.None)
         {
-            TransitionToEndScreen("It is a tie!", null);
+      await TransitionToEndScreen("It is a tie!", null);
         }
         else
         {
-            ShowLine(gameResult.WinInfo);
+            await ShowLine(gameResult.WinInfo);
             await Task.Delay(100);
-            TransitionToEndScreen("Winner: ", imageSources[gameResult.Winner]);
+   await TransitionToEndScreen("Winner: ", imageSources[gameResult.Winner]);
         }
     }
 
-    private void OnGameRestarted()
+    private async void OnGameRestarted()
     {
         for(int r=0; r<3; r++)
         {
@@ -161,7 +201,7 @@ public partial class MainWindow : Window
             }
         }
         PlayerImage.Source = imageSources[gameState.CurrentPlayer];
-        TransitionToGameScreen();
+  await TransitionToGameScreen();
     }
 
     private void GameGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -175,6 +215,10 @@ public partial class MainWindow : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        gameState.Reset();
+        if (gameState.GameOver)
+            {
+            gameState.Reset();
+        }
+    
     }
 }
