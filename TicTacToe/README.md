@@ -11,6 +11,9 @@ This project is a simple implementation of the classic Tic-Tac-Toe game using C#
 * Windows OS: The application is built using WPF, which is a Windows-only technology.
 * .NET Framework: This project requires the .NET Framework to run. Ensure that you have the appropriate version installed.
 ## Screenshots
+![z1](screenshots/z1.png)
+![z2](screenshots/z3.png)
+![z3](screenshots/z2.png)
 ## How to Use
 1) Clone the repository to your local machine.
 2) Open the solution in Visual Studio or your preferred C# development environment.
